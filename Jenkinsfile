@@ -3,12 +3,16 @@ pipeline {
     agent any
 
     tools {
-        jdk 'java17'
+        jdk 'jdk17'
         maven 'maven'
     }
 
     environment {
+
         SCANNER_HOME = tool 'sonar'
+
+        IMAGE_NAME = "prathap4004/myapp"
+
     }
 
     stages {
@@ -65,7 +69,7 @@ pipeline {
 
             steps {
 
-                sh 'trivy fs .'
+                sh 'trivy fs --severity HIGH,CRITICAL .'
 
             }
 
@@ -92,7 +96,7 @@ pipeline {
 
             steps {
 
-                sh 'docker build -t prathap4004/myapp:v1 .'
+                sh 'docker build -t $IMAGE_NAME:v1 .'
 
             }
 
@@ -102,7 +106,7 @@ pipeline {
 
             steps {
 
-                sh 'trivy image prathap4004/myapp:v1'
+                sh 'trivy image --severity HIGH,CRITICAL $IMAGE_NAME:v1'
 
             }
 
@@ -117,7 +121,7 @@ pipeline {
                     url: 'https://index.docker.io/v1/'
                 ) {
 
-                    sh 'docker push prathap4004/myapp:v1'
+                    sh 'docker push $IMAGE_NAME:v1'
 
                 }
 
@@ -146,6 +150,22 @@ pipeline {
                 sh 'kubectl get svc'
 
             }
+
+        }
+
+    }
+
+    post {
+
+        success {
+
+            echo 'CI/CD Pipeline Executed Successfully'
+
+        }
+
+        failure {
+
+            echo 'Pipeline Failed'
 
         }
 
