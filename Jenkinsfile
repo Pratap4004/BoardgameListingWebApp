@@ -106,7 +106,7 @@ pipeline {
 
             steps {
 
-                sh 'trivy image --severity HIGH,CRITICAL $IMAGE_NAME:v1'
+                sh 'trivy image --severity HIGH,CRITICAL prathap4004/ngv:v1'
 
             }
 
