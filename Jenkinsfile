@@ -96,7 +96,7 @@ pipeline {
 
             steps {
 
-                sh 'docker build -t $IMAGE_NAME:v1 .'
+                sh 'docker build -t prathap4004/ngv:v1 .'
 
             }
 
@@ -121,7 +121,7 @@ pipeline {
                     url: 'https://index.docker.io/v1/'
                 ) {
 
-                    sh 'docker push $IMAGE_NAME:v1'
+                    sh 'docker push prathap4004/ngv:v1'
 
                 }
 
