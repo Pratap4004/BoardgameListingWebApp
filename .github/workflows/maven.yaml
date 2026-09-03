@@ -27,3 +27,6 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=pratap4004 -Dsonar.projectKey=Pratap4004_BoardgameListingWebApp
+
+      - name: Build Docker image
+        run: docker build -t boardgame-app:latest . 
