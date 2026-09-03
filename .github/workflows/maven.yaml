@@ -26,4 +26,4 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=Pratap4004 -Dsonar.projectKey=Pratap4004_BoardgameListingWebApp
+        run: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=Pratap4004 -Dsonar.projectKey=pratap4004_BoardgameListingWebApp
